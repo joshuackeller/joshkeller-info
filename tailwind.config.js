@@ -17,6 +17,10 @@ module.exports = {
           black: "#000000",
         },
       },
+      fontFamily: {
+        playfair: "Playfair Display, serif",
+        uchen: "Uchen, serif",
+      },
     },
   },
   plugins: [],

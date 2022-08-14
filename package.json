@@ -11,8 +11,11 @@
   "dependencies": {
     "framer-motion": "^6.5.1",
     "next": "12.2.3",
+    "nextjs-cors": "^2.1.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "supertokens-auth-react": "^0.24.3",
+    "supertokens-node": "^11.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const DogePage = () => {
   const doges = [];
-  for (let x = 0; x < 1000; x++) {
+  for (let x = 0; x < 3000; x++) {
     doges.push(x);
   }
 

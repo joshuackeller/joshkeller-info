@@ -1,8 +1,110 @@
 import Image from "next/image";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
 import MakeArray from "../../../utilties/MakeArray";
+
+const HomeToolboxSection = () => {
+  const [moveMarquee, setMoveMarquee] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState({
+    id: 0,
+    image: "",
+    title: "",
+    text: "",
+  });
+
+  return (
+    <div>
+      <div
+        onMouseOver={() => setMoveMarquee(true)}
+        onMouseLeave={() => setMoveMarquee(false)}
+        className="w-min mx-auto"
+      >
+        <Marquee
+          play={moveMarquee}
+          className="font-playfair text-5xl font-black py-5  hover:bg-jk-pink hover:text-white text-jk-pink bg-jk-offwhite max-w-sm mx-auto transition duration-300"
+          gradient={false}
+        >
+          {MakeArray(10).map((item) => (
+            <div className="mx-5" key={item}>
+              toolbox{" "}
+            </div>
+          ))}
+        </Marquee>
+      </div>
+
+      <div className="px-5 flex max-w-7xl mx-auto ">
+        <div className="flex flex-wrap gap-10 justify-center mx-auto py-10 flex-1">
+          {TOOLS.map((tool) => (
+            <ToolItem
+              tool={tool}
+              key={tool.title}
+              setActiveSection={setActiveSection}
+            />
+          ))}
+        </div>
+        <div className="flex-1">
+          {activeSection.id != 0 ? (
+            <div>
+              <div className="flex justify-center">
+                <LeaningImage image={activeSection.image} />
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center h-full">
+              <h2 className="text-jk-gold text-3xl font-bold ">
+                &larr; select an item
+              </h2>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ToolItem = ({ tool, setActiveSection }) => {
+  return (
+    <div onClick={() => setActiveSection(tool)} className="cursor-pointer">
+      <LeaningImage image={tool.image} />
+    </div>
+  );
+};
+
+function LeaningImage({ image }) {
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
+    distanceX: 0,
+    distanceY: 0,
+  });
+  const boxRef = useRef();
+  const handleMouseMove = (e) => {
+    setMousePosition(getRelativeCoordinates(e, boxRef?.current));
+  };
+  return (
+    <motion.div
+      ref={boxRef}
+      onMouseMove={(e) => handleMouseMove(e)}
+      whileHover={{
+        rotateX: mousePosition.distanceX / 1.5,
+        rotateY: mousePosition.distanceY / 1.5,
+        //rotateZ: (mousePosition.distanceX + mousePosition.distanceY) / 2,
+      }}
+      className="mx-auto  h-[100px] w-[100px] flex items-center"
+    >
+      <Image
+        src={`/toolbox/${image}`}
+        height={100}
+        width={100}
+        className="object-contain "
+        alt="aws"
+      />
+    </motion.div>
+  );
+}
+
+export default HomeToolboxSection;
 
 const TOOLS = [
   {
@@ -135,105 +237,3 @@ function getRelativeCoordinates(event, referenceElement) {
     distanceY: position.y - (offset?.top + offset?.height / 2),
   };
 }
-
-const HomeToolboxSection = () => {
-  const [moveMarquee, setMoveMarquee] = useState<boolean>(false);
-  const [activeSection, setActiveSection] = useState({
-    id: 0,
-    image: "",
-    title: "",
-    text: "",
-  });
-
-  return (
-    <div>
-      <div
-        onMouseOver={() => setMoveMarquee(true)}
-        onMouseLeave={() => setMoveMarquee(false)}
-        className="w-min mx-auto"
-      >
-        <Marquee
-          play={moveMarquee}
-          className="font-playfair text-5xl font-black py-5  hover:bg-jk-pink hover:text-white text-jk-pink bg-jk-offwhite max-w-sm mx-auto transition duration-300"
-          gradient={false}
-        >
-          {MakeArray(10).map((item) => (
-            <div className="mx-5" key={item}>
-              toolbox{" "}
-            </div>
-          ))}
-        </Marquee>
-      </div>
-
-      <div className="px-5 flex max-w-7xl mx-auto ">
-        <div className="flex flex-wrap gap-10 justify-center mx-auto py-10 flex-1">
-          {TOOLS.map((tool) => (
-            <ToolItem
-              tool={tool}
-              key={tool.title}
-              setActiveSection={setActiveSection}
-            />
-          ))}
-        </div>
-        <div className="flex-1">
-          {activeSection.id != 0 ? (
-            <div>
-              <div className="flex justify-center">
-                <LeaningImage image={activeSection.image} />
-              </div>
-            </div>
-          ) : (
-            <div className="flex justify-center items-center h-full">
-              <h2 className="text-jk-gold text-3xl font-bold ">
-                &larr; select an item
-              </h2>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ToolItem = ({ tool, setActiveSection }) => {
-  return (
-    <div onClick={() => setActiveSection(tool)} className="cursor-pointer">
-      <LeaningImage image={tool.image} />
-    </div>
-  );
-};
-
-function LeaningImage({ image }) {
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-    distanceX: 0,
-    distanceY: 0,
-  });
-  const boxRef = useRef();
-  const handleMouseMove = (e) => {
-    setMousePosition(getRelativeCoordinates(e, boxRef?.current));
-  };
-  return (
-    <motion.div
-      ref={boxRef}
-      onMouseMove={(e) => handleMouseMove(e)}
-      whileHover={{
-        rotateX: mousePosition.distanceX / 1.5,
-        rotateY: mousePosition.distanceY / 1.5,
-        //rotateZ: (mousePosition.distanceX + mousePosition.distanceY) / 2,
-      }}
-      className="mx-auto  h-[100px] w-[100px] flex items-center"
-    >
-      <Image
-        src={`/toolbox/${image}`}
-        height={100}
-        width={100}
-        className="object-contain "
-        alt="aws"
-      />
-    </motion.div>
-  );
-}
-
-export default HomeToolboxSection;

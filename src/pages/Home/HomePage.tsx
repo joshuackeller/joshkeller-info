@@ -1,5 +1,5 @@
 import HomeHeroSection from "./sections/HomeHeroSection";
-import HomeTechnologiesSection from "./sections/HomeTechnologiesSection";
+import HomeTechnologiesSection from "./sections/HomeToolboxSection";
 
 const HomePage = () => {
   return (

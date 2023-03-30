@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import Marquee from "react-fast-marquee";
 import MakeArray from "../../../utilties/MakeArray";
+import clsx from "clsx";
+import {
+  Cog6ToothIcon,
+  Cog8ToothIcon,
+  CogIcon,
+} from "@heroicons/react/24/outline";
+import { CogIcon as SolidCogIcon } from "@heroicons/react/24/solid";
 
 const HomeToolboxSection = () => {
   const [moveMarquee, setMoveMarquee] = useState<boolean>(false);
@@ -33,8 +40,8 @@ const HomeToolboxSection = () => {
         </Marquee>
       </div>
 
-      <div className="px-5 flex max-w-7xl mx-auto ">
-        <div className="flex flex-wrap gap-10 justify-center mx-auto py-10 flex-1">
+      <div className="px-5 flex flex-col md:flex-row max-w-7xl mx-auto ">
+        <div className="flex flex-wrap gap-12 justify-center mx-auto py-10 flex-1">
           {TOOLS.map((tool) => (
             <ToolItem
               tool={tool}
@@ -43,11 +50,20 @@ const HomeToolboxSection = () => {
             />
           ))}
         </div>
-        <div className="flex-1">
+        <div className="flex-1 relative overflow-hidden m-12 ">
+          <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
+            <Cog6ToothIcon className="h-[1000px] w-[1000px] text-jk-gold animate-spin-slow " />
+          </div>
+          <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+            <Cog8ToothIcon className="h-[1000px] w-[1000px] text-jk-pink animate-spin-slow " />
+          </div>
+        </div>
+        {/* <div className="flex-1">
           {activeSection.id != 0 ? (
-            <div>
-              <div className="flex justify-center">
+            <div className="flex  items-center justify-center h-full">
+              <div>
                 <LeaningImage image={activeSection.image} />
+                <div className="text-3xl">{activeSection.title}</div>
               </div>
             </div>
           ) : (
@@ -57,7 +73,7 @@ const HomeToolboxSection = () => {
               </h2>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -71,7 +87,7 @@ const ToolItem = ({ tool, setActiveSection }) => {
   );
 };
 
-function LeaningImage({ image }) {
+function LeaningImage({ image, size = "sm" }) {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -91,7 +107,10 @@ function LeaningImage({ image }) {
         rotateY: mousePosition.distanceY / 1.5,
         //rotateZ: (mousePosition.distanceX + mousePosition.distanceY) / 2,
       }}
-      className="mx-auto  h-[100px] w-[100px] flex items-center"
+      className={clsx(
+        "mx-auto  flex items-center",
+        size == "sm" ? "h-[100px] w-[100px]" : "h-[200px] w-[200px]"
+      )}
     >
       <Image
         src={`/toolbox/${image}`}
@@ -110,110 +129,92 @@ const TOOLS = [
   {
     id: 1,
     image: "aws.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "aws",
   },
   {
     id: 2,
     image: "cloudflare.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Cloudflare",
   },
   {
     id: 3,
     image: "deno.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Deno",
   },
   {
     id: 4,
     image: "docker.webp",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Docker",
   },
   {
     id: 5,
     image: "dynamo.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "DynamoDB",
   },
   {
     id: 6,
     image: "github.webp",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Github",
   },
   {
     id: 7,
     image: "lambda.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Lambda",
   },
   {
     id: 8,
     image: "mongodb.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "MongoDB",
   },
   {
     id: 9,
     image: "mysql.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "MySql",
   },
   {
     id: 10,
     image: "next.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Next JS",
   },
   {
     id: 12,
     image: "postgres.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Postgres",
   },
   {
     id: 13,
     image: "prisma.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Prisma",
   },
   {
     id: 14,
     image: "python.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Python",
   },
   {
     id: 15,
     image: "react.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "React",
   },
   {
     id: 16,
     image: "rust.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Rust",
   },
   {
     id: 17,
     image: "tailwind.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "Tailwind CSS",
   },
   {
     id: 18,
     image: "tanstack.svg",
-    title: "name will go here",
-    text: "text will go here",
+    title: "TanStack",
   },
   {
     id: 19,
     image: "typescript.png",
-    title: "name will go here",
-    text: "text will go here",
+    title: "TypeScript",
   },
 ];
 

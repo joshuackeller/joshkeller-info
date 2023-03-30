@@ -21,6 +21,10 @@ module.exports = {
         playfair: "Playfair Display, serif",
         uchen: "Uchen, serif",
       },
+      animation: {
+        "spin-slow": "spin 20s linear infinite",
+        "spin-slower": "spin 8s linear infinite",
+      },
     },
   },
   plugins: [],

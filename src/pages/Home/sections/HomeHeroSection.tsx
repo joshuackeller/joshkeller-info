@@ -10,9 +10,9 @@ const HomeHeroSection = () => {
         drag
         dragConstraints={constraintsRef}
         dragElastic={1}
-        className="item text-white font-playfair shadow-xl text-7xl md:text-8xl bg-jk-green font-black p-8 md:p-10 w-min mx-auto my-auto"
+        className="item text-white font-inktrap shadow-xl text-7xl md:text-8xl bg-jk-green font-bold p-8 md:p-10 w-min mx-auto my-auto"
       >
-        welcome
+        josh keller
       </motion.div>
     </motion.div>
   );

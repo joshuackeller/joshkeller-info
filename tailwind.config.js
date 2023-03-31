@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 module.exports = {
   darkMode: "class",
   content: [
@@ -20,6 +23,7 @@ module.exports = {
       fontFamily: {
         playfair: "Playfair Display, serif",
         uchen: "Uchen, serif",
+        inktrap: ["var(--font-inktrap)", ...fontFamily.sans],
       },
       animation: {
         "spin-slow": "spin 20s linear infinite",

@@ -40,7 +40,7 @@ const HomeToolboxSection = () => {
         </Marquee>
       </div>
 
-      <div className="px-5 flex flex-col md:flex-row max-w-7xl mx-auto ">
+      <div className="px-5 lg:flex max-w-7xl mx-auto ">
         <div className="flex flex-wrap gap-12 justify-center mx-auto py-10 flex-1">
           {TOOLS.map((tool) => (
             <ToolItem
@@ -50,7 +50,7 @@ const HomeToolboxSection = () => {
             />
           ))}
         </div>
-        <div className="flex-1 relative overflow-hidden m-12 ">
+        <div className="flex-1 relative overflow-hidden m-12 max-lg:h-[500px]">
           <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
             <Cog6ToothIcon className="h-[1000px] w-[1000px] text-jk-gold animate-spin-slow " />
           </div>
@@ -108,7 +108,7 @@ function LeaningImage({ image, size = "sm" }) {
         //rotateZ: (mousePosition.distanceX + mousePosition.distanceY) / 2,
       }}
       className={clsx(
-        "mx-auto  flex items-center",
+        "mx-auto flex items-center p-1",
         size == "sm" ? "h-[100px] w-[100px]" : "h-[200px] w-[200px]"
       )}
     >
